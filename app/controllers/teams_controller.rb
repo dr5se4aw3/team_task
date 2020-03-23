@@ -22,7 +22,7 @@ class TeamsController < ApplicationController
     @assign = Assign.find(params[:assign_id])
     @team.owner_id = @assign.user.id
     if @team.save
-      ContactMailer.owner_mail(User.find(@team.owner_id))
+      OwnerMailer.owner_mail(@team).deliver
       redirect_to team_path(@team), notice: I18n.t('views.messages.change_leader')
     end
   end
