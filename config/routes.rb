@@ -8,8 +8,9 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
   }
   resource :user
-  
+
   resources :teams do
+    get 'change_leader', to: 'teams#change_leader'
     resources :assigns, only: %w(create destroy)
     resources :agendas, shallow: true do
       resources :articles do

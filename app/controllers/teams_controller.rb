@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: %i[show edit update destroy]
+  before_action :set_team, only: %i[show edit update destroy ]
 
   def index
     @teams = Team.all
@@ -16,6 +16,15 @@ class TeamsController < ApplicationController
   end
 
   def edit; end
+
+  def change_leader
+    @team = Team.find(params[:team_id])
+    @assign = Assign.find(params[:assign_id])
+    @team.owner_id = @assign.user.id
+    if @team.save
+      redirect_to team_path(@team), notice: I18n.t('views.messages.change_leader')
+    end
+  end
 
   def create
     @team = Team.new(team_params)
@@ -54,6 +63,7 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.fetch(:team, {}).permit %i[name icon icon_cache owner_id keep_team_id]
+    params.fetch(:team, {}).permit %i[id name icon icon_cache owner_id keep_team_id]
   end
+
 end
