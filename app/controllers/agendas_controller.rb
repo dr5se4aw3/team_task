@@ -23,7 +23,13 @@ class AgendasController < ApplicationController
 
   def destroy
     set_agenda
+    unless author_or_owner?
+      redirect_to dashboard_url, notice: I18n.t('views.messages.no_authority') and return
+    end
+    binding.pry
+    users = @agenda.team.users.pluck(:id,:email)
     if @agenda.destroy
+      AgendaMailer.agenda_mail(@agenda).deliver
       redirect_to dashboard_url, notice: I18n.t('views.messages.delete_agenda')
     end
   end
@@ -37,4 +43,13 @@ class AgendasController < ApplicationController
   def agenda_params
     params.fetch(:agenda, {}).permit %i[title description]
   end
+
+  def author_or_owner?
+    if (current_user.id == @agenda.user_id) || (current_user.id == @agenda.team.owner_id)
+      true
+    else
+      false
+    end
+  end
+
 end
