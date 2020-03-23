@@ -219,6 +219,7 @@ ja:
       failed_to_save_team: '保存に失敗しました、、'
       update_team: 'チーム更新に成功しました！'
       delete_team: 'チーム削除に成功しました！'
+      leader_only_can_edit_team: 'チームの編集はそのチームのリーダーのみ可能です。'
       update_profile: 'プロフィールを編集しました！'
       complete_registration: '登録完了'
       edit_article: '記事を編集する'
