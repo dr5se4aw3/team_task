@@ -14,7 +14,6 @@ class AssignsController < ApplicationController
 
   def destroy
     assign = Assign.find(params[:id])
-    binding.pry
     unless (current_user.id == assign.user.id) || (current_user.id == assign.team.owner_id )
       redirect_to team_url(params[:team_id]), notice: I18n.t('views.messages.cannot_delete_other_member')
       return
