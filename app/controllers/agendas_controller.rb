@@ -26,10 +26,9 @@ class AgendasController < ApplicationController
     unless author_or_owner?
       redirect_to dashboard_url, notice: I18n.t('views.messages.no_authority') and return
     end
-    binding.pry
-    users = @agenda.team.users.pluck(:id,:email)
+    users = @agenda.team.users.pluck(:email)
     if @agenda.destroy
-      AgendaMailer.agenda_mail(@agenda).deliver
+      AgendaMailer.agenda_mail(@agenda,users).deliver
       redirect_to dashboard_url, notice: I18n.t('views.messages.delete_agenda')
     end
   end
