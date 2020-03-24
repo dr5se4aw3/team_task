@@ -20,6 +20,14 @@ class TeamsController < ApplicationController
   def change_leader
     @team = Team.find(params[:team_id])
     @assign = Assign.find(params[:assign_id])
+    unless current_user.id == @team.owner_id
+      redirect_to team_path(@team), notice: I18n.t('views.messages.no_authority') and return
+    end
+
+    unless @assign.team_id == @team.id
+      redirect_to team_path(@team), notice: I18n.t('views.messages.not_member') and return
+    end
+
     @team.owner_id = @assign.user.id
     if @team.save
       OwnerMailer.owner_mail(@team).deliver
