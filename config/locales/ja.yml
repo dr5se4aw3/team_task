@@ -205,14 +205,18 @@ ja:
     pm: 午後
   views:
     messages:
+      no_authority: '権限がありません。'
       create_agenda: 'アジェンダ作成に成功しました！'
       create_article: '記事作成に成功しました！'
       update_article: '記事更新に成功しました！'
       assigned: 'アサインしました！'
       failed_to_assign: 'アサインに失敗しました！'
       cannot_delete_the_leader: 'リーダーは削除できません。'
+      change_leader: 'チームリーダーが変更されました。'
+      initial_leader: 'あなたがチームリーダーになりました。'
       cannot_delete_only_a_member: 'このユーザーはこのチームにしか所属していないため、削除できません。'
       delete_member: 'メンバーを削除しました。'
+      not_member: 'このユーザーはチームメンバーではありません。'
       cannot_delete_member_4_some_reason: 'なんらかの原因で、削除できませんでした。'
       failed_to_post: '投稿できませんでした...'
       create_team: 'チーム作成に成功しました！'
@@ -257,6 +261,7 @@ ja:
       delete: '削除'
       create: '作成'
       invite: '招待'
+      change_leader: '権限移動'
     top:
       line1: 'このアプリケーションは、チームごと、議題ごとに別れて'
       line2: '特定のイシュー（議題）をメンバーで見やすく共有するためのアプリケーションです'
